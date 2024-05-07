@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+{% load static %}
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block content %}
+<title>Туры</title>
+<link rel="stylesheet" href="{% static 'tour.css' %}" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<form id="searchForm" action="/statistic/" method="post">
+  {% csrf_token %}
+  <input type="hidden" id="csrf_token" value="{{ csrf_token }}">
+  <input type="text" id="airline_name" name="airline_name_textbox" placeholder="Введите название авиакомпании или ничего для туроператора">
+  <button type="submit" id="stat_search" >рассчитать</button>
+{%if data%}
+<ul>
+  {%for dat in data%}
+  <li>
+  <div class='rectangle'>
+      <div class='content'>
+        <div class='price'>Прибыль {{dat.income}}</div>
+          <div class='turnover'>Оборот {{dat.turnover}}</div>
+        <div class='orders'>Количество заказов {{dat.order}}</div>
+
+ </div>
+    </div>
+  </div>
+  </li>
+ </ul>
+  {% endfor %}
+{% endif %}
+</body>
+{% endblock %}
+</html>

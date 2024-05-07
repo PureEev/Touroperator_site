@@ -1,0 +1,64 @@
+{% extends 'main.html' %}
+{% load static%}
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block content %}
+<title>Прямоугольник с изображением и прозрачным фоном</title>
+    <link rel="stylesheet" href="{% static 'index.css' %}" />
+</head>
+<body>
+<div class="container">
+    <div class="top-container" style="background-image: url({%static 'image1.jpg' %});">
+
+        <div class="left">
+            <!-- Левая область верхнего прямоугольника -->
+            <h2 class="title-big">Откройте для себя красоту мира</h2>
+            <h3 class="title-small">Планируй своё путешествие сегодня</h3>
+            <a href="other_page.html" class="button">Начать путешествие</a>
+        </div>
+        <div class="right">
+
+        </div>
+    </div>
+    <div class="bottom-container">
+        <!-- Нижний прямоугольник -->
+        <div>
+            <h2>Выбрать город</h2>
+        </div>
+        <div>
+            <h2>Выбрать дату</h2>
+        </div>
+        <div>
+            <h2>Выбрать количество людей</h2>
+        </div>
+        <div>
+            <a href="#" class="button">Найти тур</a>
+        </div>
+    </div>
+    <p class="caption">Это нижняя надпись</p>
+    <div class="square-container">
+            <div class="square" style=" background-image: url({% static 'newlogo1.png'%});">
+                <div class="captionlogo">Уединение в горах</div>
+            </div>
+            <div class="square" style=" background-image: url('{% static 'newlogo2.png'%}');">
+                <div class="captionlogo">Солнечные ванны</div>
+            </div>
+            <div class="square" style=" background-image: url('{% static 'newlogo3.png'%}');">
+                <div class="captionlogo">Зимняя сказка</div>
+            </div>
+            <div class="square" style=" background-image: url('{% static 'newlogo4.png'%}');">
+                <div class="captionlogo">Наследие запада</div>
+            </div>
+            <div class="square" style=" background-image: url('{% static 'newlogo5.png'%}');">
+                <div class="captionlogo">Экзотический отдых</div>
+            </div>
+            <div class="square" style=" background-image: url('{% static 'newlogo6.png'%}');">
+                <div class="captionlogo">Горячие предложения</div>
+            </div>
+    </div>
+</div>
+{% endblock %}
+</body>
+</html>

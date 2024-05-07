@@ -1,0 +1,214 @@
+
+
+body {
+    margin: 0;
+    padding: 0;
+        background-color: rgb(166, 197, 145); /* Цвет фона для всей страницы */
+}
+
+/* Стили для контейнера с турами */
+.tours-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.long-rectangle {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: 100px; /* Высота вашего длинного прямоугольника */
+    position: fixed; /* Изменено на fixed */
+    top: 0;
+    background-color: rgb(255, 255, 255); /* Добавим белый фон, чтобы отличить от содержимого страницы */
+    z-index: 1000; /* Чтобы "long-rectangle" оставался поверх другого содержимого */
+}
+
+
+.cont {
+    background-color: rgb(166, 197, 145);
+    display: flex;
+    flex-wrap: wrap; /* Разрешаем перенос элементов на новую строку */
+    justify-content: center; /* Центрируем элементы по горизонтали */
+    align-items: center;
+    width: 100%;
+    padding-top: 80px;
+    box-sizing: border-box;
+}
+
+
+.rectangle-section {
+    height: 100%;
+    background-size: 100% 100%; /* Изменение свойства background-size */
+}
+
+.tour-rectangle {
+    position: relative;
+    width: calc(30% - 20px);
+    margin: 20px;
+    height: 250px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.tour-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 1; /* Устанавливаем выше, чем у псевдоэлемента */
+}
+
+.tour-rectangle::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 5px;
+    z-index: 0; /* Устанавливаем ниже, чем у содержимого */
+}
+
+.tour-image {
+    display: none; /* Скрываем изображение */
+}
+
+.tour-rectangle:hover::after {
+    display: block; /* Отображаем фон при наведении */
+}
+
+.tour-title,
+.tour-description,
+.tour-price {
+    color: white; /* Задаем цвет текста */
+    z-index: 2; /* Устанавливаем выше, чем у псевдоэлемента */
+}
+
+.section-2 {
+    flex: 2;
+    display: flex; /* Делаем контейнер флексбоксом */
+    justify-content: center; /* Центрируем содержимое по горизонтали */
+    align-items: center; /* Центрируем содержимое по вертикали */
+}
+
+.search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+/* Стили для поля ввода */
+.search-form input[type="text"] {
+    width: 200px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+/* Стили для кнопки поиска */
+.search-form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: rgb(167,203,215);
+    color: white;
+}
+
+.section-3 {
+    flex: 2; /* Задает ширину третьей области */
+}
+/* Стили при наведении на кнопку */
+.search-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Стили для названия тура */
+.tour-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: rgb(229, 236, 230);
+
+}
+
+/* Стили для цены тура */
+.tour-price {
+    font-size: 16px;
+    color: white;
+    margin-bottom: 5px;
+    color: rgb(229, 236, 230);
+
+}
+
+/* Стили для кнопки "Купить" */
+.buy-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(167,203,215);
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    cursor: pointer;
+}
+.tour-name{
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    align-self: flex-start; /* Поднимаем надпись вверх */
+    margin-left: 11px;
+    margin-left: 105px;
+    margin-right: 30px;
+    color: rgb(229, 236, 230);
+}
+.buy-button:hover {
+    background-color: #0056b3;
+}
+
+.square2 {
+    width: auto; /* Автоматическая ширина в зависимости от содержимого */
+    height: auto; /* Автоматическая высота в зависимости от содержимого */
+    padding: 10px 20px; /* Поля вокруг текста */
+    margin-right: 10px; /* Отступ между кнопками */
+    border: 2px solid black; /* Граница для визуализации */
+        cursor: pointer; /* Указатель при наведении */
+    color: black; /* Цвет текста */
+    font-size: 16px; /* Размер шрифта */
+    border-radius: 5px; /* Скругленные углы */
+    margin-right: 80px;
+    margin-left: 30px;
+
+}
+
+/* Стили при наведении на кнопку */
+.square2:hover {
+    background-color: skyblue;
+}
+.tour-name1{
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    align-self: flex-start; /* Поднимаем надпись вверх */
+    margin-left: 11px;
+    margin-left: 120px;
+    margin-right: 30px;
+    color: rgb(229, 236, 230);
+}
+

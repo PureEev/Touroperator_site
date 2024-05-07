@@ -1,0 +1,83 @@
+{% extends 'main.html' %}
+{% load static %}
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block content %}
+<title>Туры</title>
+<link rel="stylesheet" href="{% static 'tour.css' %}" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<form id="searchForm" action="/tour/" method="post">
+  {% csrf_token %}
+  <input type="hidden" id="csrf_token" value="{{ csrf_token }}">
+  <input type="text" id="city_name" name="city_name_textbox" placeholder="Введите название города">
+  <button type="submit" id="Tour_search" >Поиск</button>
+        <input type="date" id="datePickerWith" name ="datePickerWith">
+        <input type="date" id="datePickerBefore" name ="datePickerBefore">
+
+</form>
+{%if data%}
+<ul>
+  {%for dat in data%}
+  <li>
+  <div class='tour-rectangle'>
+      <div class='tour-content'>
+        <div class='tour-name'>{{dat.tourname}}</div>
+        <div class='tour-description'>{{dat.tourdescription}}</div>
+        <div class='tour-price'>Цена: {{dat.tourprice}}</div>
+        <div class='tour-image' style="background-image: url({% static dat.image_url %})"></div>
+<button class='buy-button'>Купить</button>
+<div class="quantity-input">
+  <input type="number" class="quantity" value="0" min="0">
+ </div>
+    </div>
+  </div>
+  </li>
+ </ul>
+  {% endfor %}
+{% endif %}
+<div id="tours-container" class="tours-container">
+  <!-- Сюда будут добавляться туры после поиска -->
+</div>
+<script>
+  $(document).ready(function() {
+  $('.buy-button').click(function() {
+    var tourName = $(this).siblings('.tour-name').text(); // Получаем название тура
+    var quantity = $(this).siblings('.quantity-input').find('.quantity').val(); // Получаем количество из поля ввода
+    $.ajax({
+      type: 'POST',
+      url: '/buy_tour/', // URL-адрес вашего представления для покупки тура
+      data: {
+        'tour_name': tourName,
+        'quantity': quantity,
+        'csrfmiddlewaretoken': $('#csrf_token').val()
+      },
+      success: function(response) {
+        if (response.success) {
+          var message = response.message;
+          var x = response.x; // Получаем значение переменной x из JSON-ответа
+          alert(message ); // Показываем уведомление с переменной x
+        } else {
+          alert('Произошла ошибка при добавлении тура.'); // Показываем уведомление об ошибке
+        }
+      },
+      error: function(xhr, errmsg, err) {
+        console.log(xhr.status + ": " + xhr.responseText); // Выводим ошибку в консоль
+        alert('Произошла ошибка при выполнении запроса.');
+        // Здесь можно предпринять действия в случае ошибки
+      }
+    });
+  });
+});
+</script>
+</body>
+{% endblock %}
+</html>
+
+
+
+

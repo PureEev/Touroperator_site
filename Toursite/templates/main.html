@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Прямоугольник с изображением и прозрачным фоном</title>
+<style>
+    {%load static%}
+body {
+    margin: 0;
+    padding: 0;
+}
+.long-rectangle {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: 100px; /* Высота вашего длинного прямоугольника */
+    position: fixed; /* Изменено на fixed */
+    top: 0;
+    background-color: rgb(255, 255, 255); /* Добавим белый фон, чтобы отличить от содержимого страницы */
+    z-index: 1000; /* Чтобы "long-rectangle" оставался поверх другого содержимого */
+}
+
+.container {
+    background-color: rgb(166, 197, 145); /* Цвет фона для всей страницы */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-top: 120px; /* Добавлено для компенсации высоты верхнего прямоугольника */
+    box-sizing: border-box;
+}
+
+
+.section-1 {
+    flex: 0;
+    display: flex; /* Делаем контейнер флексбоксом */
+    align-items: center; /* Выравниваем содержимое по вертикали */
+}
+
+.left-content {
+    flex: 1; /* Занимает всю доступную ширину */
+}
+
+.right-content {
+    flex: 0 0 auto; /* Не расширяется и не сжимается */
+    margin-left: 10px; /* Добавляем небольшой отступ между левым и правым контентом */
+}
+
+.right-content p {
+    margin: 0; /* Убираем отступы у параграфа */
+}
+
+.section-2 {
+    flex: 2;
+    display: flex; /* Делаем контейнер флексбоксом */
+    justify-content: center; /* Центрируем содержимое по горизонтали */
+    align-items: center; /* Центрируем содержимое по вертикали */
+}
+
+/* Добавляем стили для кнопок square2 */
+.square2 {
+    width: auto; /* Автоматическая ширина в зависимости от содержимого */
+    height: auto; /* Автоматическая высота в зависимости от содержимого */
+    padding: 10px 20px; /* Поля вокруг текста */
+    margin-right: 10px; /* Отступ между кнопками */
+    border: 2px solid black; /* Граница для визуализации */
+        cursor: pointer; /* Указатель при наведении */
+    color: black; /* Цвет текста */
+    font-size: 16px; /* Размер шрифта */
+    border-radius: 5px; /* Скругленные углы */
+    margin-right: 80px;
+    margin-left: 30px;
+
+}
+
+/* Стили при наведении на кнопку */
+.square2:hover {
+    background-color: skyblue;
+}
+/* Стили для поисковой формы */
+.search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+/* Стили для поля ввода */
+.search-form input[type="text"] {
+    width: 200px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+/* Стили для кнопки поиска */
+.search-form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: rgb(167,203,215);
+    color: white;
+}
+
+/* Стили при наведении на кнопку */
+.search-form button:hover {
+    background-color: #0056b3;
+}
+
+.section-3 {
+    flex: 2; /* Задает ширину третьей области */
+    .button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        border: 2px solid black;
+        color: black;
+        font-size: 16px;
+    }
+    .button:hover {
+        background-color: skyblue;
+
+</style>
+    <head>
+<div class="container">
+    <div class="long-rectangle">
+        <!-- Длинный прямоугольник -->
+        <div class="rectangle-section section-1">
+            <img src="{% static 'image_left.jpg '%}" alt="Left Image">
+        </div>
+        <div class="rectangle-section section-2">
+        <a href="{%url 'index'%}" class="square2">Главная</a>
+        <a href="{%url 'tour'%}" class="square2">Туры</a>
+        <a href="{%url 'search'%}" class="square2">Поиск</a>
+        <a href="{%url 'refund'%}" class="square2">Возврат</a>
+            <a href="{%url 'statistic'%}" class="square2">Статистика</a>
+    </div>
+
+        <div class="rectangle-section section-3">
+            <form class="search-form" action="/search" method="GET">
+                <input type="text" name="query" placeholder="Город прибытия">
+                <button type="submit">Поиск</button>
+            </form>
+        </div>
+        <div class="rectangle-section section-4"></div>
+        <div class="rectangle-section section-5"></div>
+        <div class="rectangle-section section-6"></div>
+    </div>
+</div>
+</head>
+<body>
+    {% block content %}{% endblock %}
+</body>>
+</html>

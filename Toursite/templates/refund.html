@@ -1,0 +1,55 @@
+{% extends 'main.html' %}
+{% load static %}
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block content %}
+    <link rel="stylesheet" href="{% static 'tour.css' %}" />
+<title>Возврат</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<form id="searchForm" action="/refund_action/" method="post">
+  {% csrf_token %}
+  <input type="hidden" id="csrf_token" value="{{ csrf_token }}">
+  <input type="text" id="unique_number" name="unique_number" placeholder="введите уникальный номер возврата ">
+  <button type="submit" id="Refund" >Вернуть</button>
+</form>
+
+<div id="tours-container" class="tours-container">
+  <!-- Сюда будут добавляться туры после поиска -->
+</div>
+<script>
+  $(document).ready(function() {
+  $('.buy-button').click(function() {
+    var number = $(this).siblings('.unique_number').text(); // Получаем название тура
+    $.ajax({
+      type: 'POST',
+      url: '/refund_action/', // URL-адрес вашего представления для покупки тура
+      data: {
+        'unique_number': number,
+        'csrfmiddlewaretoken': $('#csrf_token').val()
+      },
+      success: function(response) {
+        if (response.success) {
+          var message = response.message;
+          var x = response.x; // Получаем значение переменной x из JSON-ответа
+          alert(message + ' Количество туров: ' + x); // Показываем уведомление с переменной x
+        } else {
+          alert('Произошла ошибка при добавлении тура.'); // Показываем уведомление об ошибке
+        }
+      },
+      error: function(xhr, errmsg, err) {
+        console.log(xhr.status + ": " + xhr.responseText); // Выводим ошибку в консоль
+        alert('Произошла ошибка при выполнении запроса.');
+        // Здесь можно предпринять действия в случае ошибки
+      }
+    });
+  });
+});
+</script>
+</body>
+{% endblock %}
+</html>

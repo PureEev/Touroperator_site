@@ -1,0 +1,105 @@
+{% extends 'main.html' %}
+{% block content %}
+{% load static%}
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ависалес</title>
+    <link rel="stylesheet" href="{% static 'search.css' %}" />
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+        <section class="wrapper">
+            <form id="searchForm" action="/Поиск/" method="post">
+  {% csrf_token %}
+    <div class="wrapper__search">
+        <div class="input" style="display: block;">
+            <label>Откуда
+                <input type="text" class="input__cities-from" name="city_from" required />
+            </label>
+            <ul class="dropdown dropdown__cities-from"></ul>
+        </div>
+
+        <div class="input">
+            <label>Куда
+                <input type="text" class="input__cities-to" name="city_to" required />
+            </label>
+            <ul class="dropdown dropdown__cities-to"></ul>
+        </div>
+
+        <div class="input input__cities-from">
+            <label>Отправление
+                <input type="date" class="input__date-depart" name="date_departure" required />
+            </label>
+        </div>
+    </div>
+
+    <div class="wrapper__button">
+        <button type="submit" class="button button__search" id="searchButton">
+            <span class="button__search-text">Найти билеты</span>
+        </button>
+    </div>
+</form>
+            {%if data%}
+<ul>
+  {%for dat in data%}
+<div class="ticket">
+  <li>
+    <div class="Ticket_number">Номер билета: {{dat.flight_number}}</div>
+    <div class="City_To">Город отправления: {{dat.city_to}}</div>
+    <div class="Date">Дата: {{dat.date}}</div>
+    <div class="time">Время: {{dat.time}}</div>
+    <div class="City_From">Город прибытия: {{dat.city_from}}</div>
+    <div class="flight_duration">Продолжительность полёта: {{dat.flight_duration}}</div>
+    <div class="price">Цена: {{dat.price}}</div>
+    <div class="tickets_number">Количество билетов: {{dat.tickets_number}}</div>
+    <div class="aircraft">Самолёт: {{dat.aircraft}}</div>
+    <div class="airline">Авиакомпания: {{dat.airline}}</div>
+    <button class='buy-button'>Купить</button>
+<div class="quantity-input">
+  <input type="number" class="quantity" value="0" min="0">
+</div>
+</div>
+    </li>
+ </ul>
+  {% endfor %}
+{% endif %}
+        </section>
+<script>
+    $(document).ready(function() {
+  $('.buy-button').click(function() {
+    var TicketNumber = $(this).siblings('.Ticket_number').text();
+    var price = $(this).siblings('.price').text();
+    var quantity = $(this).siblings('.quantity-input').find('.quantity').val(); // Получаем количество из поля ввода
+    $.ajax({
+      type: 'POST',
+      url: '/buy_ticket/', // URL-адрес вашего представления для покупки тура
+      data: {
+        'Ticket_number': TicketNumber,
+        'quantity': quantity,
+        'price': price,
+        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+      },
+      success: function(response) {
+        if (response.success) {
+          var message = response.message;
+          var x = response.x; // Получаем значение переменной x из JSON-ответа
+          alert(message); // Показываем уведомление с переменной x
+        } else {
+          alert('Произошла ошибка при добавлении тура.'); // Показываем уведомление об ошибке
+        }
+      },
+      error: function(xhr, errmsg, err) {
+        console.log(xhr.status + ": " + xhr.responseText); // Выводим ошибку в консоль
+        alert('Произошла ошибка при выполнении запроса.');
+        // Здесь можно предпринять действия в случае ошибки
+      }
+    });
+  });
+});
+</script>
+</body>
+
+{% endblock %}
+</html>
