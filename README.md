@@ -16,6 +16,18 @@
 
 Составим схему нашей будущей базы данных
 
-![Пример изображения](https://raw.githubusercontent.com/PureEev/Touroperator_site/main/schema.jpg)
+![Схема таблиц](https://raw.githubusercontent.com/PureEev/Touroperator_site/main/schema.jpg)
 
 Переносим таблицы в MySQL Workbench и запускаем локальный сервер, через который будем работать, подключаем его через настройки.
+
+![aircraft](https://raw.githubusercontent.com/PureEev/Touroperator_site/main/aircraft.jpg)
+![airlines](https://raw.githubusercontent.com/PureEev/Touroperator_site/main/airlines.jpg)
+![cities](https://raw.githubusercontent.com/PureEev/Touroperator_site/main/cities.jpg)
+![connect_airlines_aircraft](https://raw.githubusercontent.com/PureEev/Touroperator_site/main/connect_airlines_aircraft.jpg)
+![connect_tours_wfs](https://raw.githubusercontent.com/PureEev/Touroperator_site/main/connect_tours_wfs.jpg)
+![flight_in_tours](https://raw.githubusercontent.com/PureEev/Touroperator_site/main/flight_in_tours.jpg)
+![flight_schedule](https://raw.githubusercontent.com/PureEev/Touroperator_site/main/flight_schedule.jpg)
+![history](https://raw.githubusercontent.com/PureEev/Touroperator_site/main/history.jpg)
+![tour_booking_history](https://raw.githubusercontent.com/PureEev/Touroperator_site/main/tour_booking_history.jpg)
+![weekly_flight_schedule](https://raw.githubusercontent.com/PureEev/Touroperator_site/main/weekly_flight_schedule.jpg)
+
